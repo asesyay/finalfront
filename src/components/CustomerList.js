@@ -1,11 +1,13 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { AgGridReact } from 'ag-grid-react'
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import Button from '@mui/material/Button'
-//import AddCar from "./AddCar";
+import AddCustomer from "./AddCustomer";
 import Snackbar from '@mui/material/Snackbar';
-//import EditCar from './EditCar';
+import EditCustomer from './EditCustomer';
+import Stack from '@mui/material/Stack';
+
 
 function CustomerList()
 {
@@ -15,6 +17,8 @@ function CustomerList()
     }, [])
     const[open, setOpen]= useState(false);
     const[msg, setMsg] = useState('');
+    let gridApi;
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -30,7 +34,7 @@ function CustomerList()
 
     const deleteCustomer = (url) => {
         if (window.confirm('Are you sure')) {
-            console.log(url)
+            
             fetch(url, {method: 'DELETE'})
                 .then(response => {
                 if (response.ok) {
@@ -45,35 +49,35 @@ function CustomerList()
             .catch((err) => console.error(err));
         }
     }
-    /*
-    const addCar = car => {
-        fetch('http://carrestapi.herokuapp.com/cars', {
+    
+    const addCustomer = customer => {
+        fetch('https://customerrest.herokuapp.com/api/customers', {
             method: 'POST',
             headers: {
                 'Content-type':'application/json'
         },
-        body: JSON.stringify(car)
+        body: JSON.stringify(customer)
         })
-        .then(response =>  fetchCars())
+        .then(response =>  fetchCustomers())
         .catch(err => console.error(err));
-        setMsg('Car Added');
+        setMsg('Customer Added');
         setOpen(true);
     }
-
-    const editCar = (link, updatedCar) => {
+    
+    const editCustomer = (link, updatedCustomer) => {
         fetch(link,{
             method: 'PUT',
             headers: {
                 'Content-type':'application/json'
             },
-            body: JSON.stringify(updatedCar)
+            body: JSON.stringify(updatedCustomer)
         })
-        .then(response => fetchCars())
+        .then(response => fetchCustomers())
         .catch(err => console.error(err));
         setMsg('Car Updated');
         setOpen(true);
     }
-    */
+    
 
     
 
@@ -85,38 +89,56 @@ function CustomerList()
         {field: 'city'},
         {field: 'email'},
         {field: 'phone'},
-        /*{
+        {
         headerName: '',
         sortable: false,
         filter: false,
         width:120,
-        field: '_links.self.href',
-        cellRendererFramework: (params) => <EditCar editCar={editCar} row={params}/>
+        field: 'links.0.href',
+        cellRendererFramework: (params) => <EditCustomer editCustomer={editCustomer} row={params}/>
         
         },
-        */
+        
         {
-            /*headerName: '',
+            headerName: '',
             sortable: false,
             filter: false,
             width: 120,
-            */
+            
             
             field: 'links.0.href',
-            width: 600,
-            //cellRendererFramework: (params) => <Button onClick={() => deleteCustomer(params.value)}>Delete</Button>
+            
+            cellRendererFramework: (params) => <Button onClick={() => deleteCustomer(params.value)}>Delete</Button>
         }
     ]
+    
+    const onGridReady=(params)=>{
+        gridApi=params.api;
+        console.log(gridApi)
+    }
+    const onExportClick=()=>{
+        gridApi.exportDataAsCsv()
+    }
+    const TwoButtonOnTopStyle = {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    }
 
     return(
         <div>
-        <div className="ag-theme-alpine" style={{marginTop: 20, height: 600, width: '90%', margin: 'center'}}>
+            <Stack spacing={2} direction="row" justifyContent="center">
+                <AddCustomer addCustomer={addCustomer} style={{marginTop: 50}}/>
+                <Button onClick={()=>onExportClick()}>Export</Button>
+            </Stack>
+        <div className="ag-theme-alpine" style={{marginTop: 20, height: 600, width: '100%', margin: 'center'}}>
             <AgGridReact
                 rowData={customers}
                 columnDefs={column}
                 pagination={true}
                 paginationPageSize={10}
                 suppressCellSelection={true}
+                onGridReady={onGridReady}
             />
         </div>
         <Snackbar open={open} message={msg}
