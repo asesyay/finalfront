@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import CustomerList from './CustomerList';
 import TrainingsList from './TrainingsList';
-
+import StatisticsView from './StatisticsView';
 
 function Header() 
 {
@@ -17,6 +17,7 @@ function Header()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [clAppear, setClAppear] = React.useState(true);
   const [tlAppear, setTlAppear] = React.useState(false);
+  const [stAppear, setStAppear] = React.useState(false);
   
 
 
@@ -30,21 +31,22 @@ function Header()
     setAnchorEl(null);
   };
   const OpenCustomerList = () => {
-    
+    setStAppear(false);
     setClAppear(true);
     setTlAppear(false);
     setAnchorEl(null);
+    
   };
   const OpenTrainingList = () => {
     setClAppear(false);
-    
+    setStAppear(false);
     setTlAppear(true);
     setAnchorEl(null);
   };
   const OpenGraph = () => {
     setClAppear(false);
     setTlAppear(false);
-    
+    setStAppear(true);
     setAnchorEl(null);
   }
   
@@ -88,6 +90,7 @@ function Header()
                 >
                     <MenuItem onClick={OpenCustomerList}>Customer List</MenuItem>
                     <MenuItem onClick={OpenTrainingList}>Trainings</MenuItem>
+                    <MenuItem onClick={OpenGraph}>Graphic</MenuItem>
                     
                 </Menu>
                 </div>
@@ -97,6 +100,7 @@ function Header()
         </Box>
         {clAppear && <CustomerList/>}
         {tlAppear && <TrainingsList/>}
+        {stAppear && <StatisticsView/>}
         
      </div>
   );
