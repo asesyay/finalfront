@@ -6,6 +6,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
 import AddTraining from './AddTraining'
+import Stack from '@mui/material/Stack';
 
 function TrainingsList()
 {
@@ -16,6 +17,7 @@ function TrainingsList()
     const[trUrl, setTrUrl] = useState('https://customerrest.herokuapp.com/api/trainings')
     const[open, setOpen]= useState(false);
     const[msg, setMsg] = useState('');
+    const [gridApi, setGridApi]=useState('');
 
     
 
@@ -87,12 +89,24 @@ function TrainingsList()
         }
     ]
 
+    const onGridReady=(params)=>{
+        setGridApi(params.api);
+        console.log(gridApi)
+    }
+    const onExportClick=()=>{
+        gridApi.exportDataAsCsv()
+    }
+
 
 
 
     return(
         <div>
-            <AddTraining addTraining={addTraining} style={{marginTop: 50}}/>
+            <Stack marginTop={2} spacing={2} direction="row" justifyContent="center">
+                <AddTraining addTraining={addTraining} style={{marginTop: 50}}/>
+                <Button variant="outlined" onClick={()=>onExportClick()}>Export</Button>
+            </Stack>
+            
         <div className="ag-theme-alpine" style={{marginTop: 20, height: 600, width: '100%', margin: 'center'}}>
             <AgGridReact
                 rowData={trainings}
@@ -100,6 +114,7 @@ function TrainingsList()
                 pagination={true}
                 paginationPageSize={10}
                 suppressCellSelection={true}
+                onGridReady={onGridReady}
             />
             <Snackbar open={open} message={msg}
         autoHideDuration={3000}

@@ -127,9 +127,9 @@ function CustomerList()
 
     return(
         <div>
-            <Stack spacing={2} direction="row" justifyContent="center">
+            <Stack spacing={2} marginTop={2} direction="row" justifyContent="center">
                 <AddCustomer addCustomer={addCustomer} style={{marginTop: 50}}/>
-                <Button onClick={()=>onExportClick()}>Export</Button>
+                <Button variant="outlined" onClick={()=>onExportClick()}>Export</Button>
             </Stack>
         <div className="ag-theme-alpine" style={{marginTop: 20, height: 600, width: '100%', margin: 'center'}}>
             <AgGridReact
