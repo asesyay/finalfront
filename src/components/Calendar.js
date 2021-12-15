@@ -39,6 +39,7 @@ function MyCalendar() {
             startAccessor="start"
             endAccessor="end"
             style={{ backgroundColor: 'white' }}
+            
         />
         </Box>
     )
