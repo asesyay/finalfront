@@ -63,6 +63,8 @@ function CustomerList()
         setMsg('Customer Added');
         setOpen(true);
     }
+
+    
     
     const editCustomer = (link, updatedCustomer) => {
         fetch(link,{
@@ -86,9 +88,10 @@ function CustomerList()
         {field: 'lastname', sortable: true, filter: true},
         {field: 'streetaddress', sortable: true, filter: true},
         {field: 'postcode', sortable: true, filter: true},
-        {field: 'city'},
+        {field: 'city', width: 100},
         {field: 'email'},
-        {field: 'phone'},
+        {field: 'phone', width: 170},
+        
         {
         headerName: '',
         sortable: false,
@@ -109,7 +112,8 @@ function CustomerList()
             field: 'links.0.href',
             
             cellRendererFramework: (params) => <Button onClick={() => deleteCustomer(params.value)}>Delete</Button>
-        }
+        },
+        {field: 'links.0.href', headerName: 'Link', width: 430},
     ]
     
     const onGridReady=(params)=>{
@@ -135,6 +139,7 @@ function CustomerList()
                 paginationPageSize={10}
                 suppressCellSelection={true}
                 onGridReady={onGridReady}
+                enableCellTextSelection={true}
             />
         </div>
         <Snackbar open={open} message={msg}
