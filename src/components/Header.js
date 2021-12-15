@@ -10,6 +10,7 @@ import Menu from '@mui/material/Menu';
 import CustomerList from './CustomerList';
 import TrainingsList from './TrainingsList';
 import StatisticsView from './StatisticsView';
+import MyCalendar from './Calendar'
 
 function Header() 
 {
@@ -18,6 +19,8 @@ function Header()
   const [clAppear, setClAppear] = React.useState(true);
   const [tlAppear, setTlAppear] = React.useState(false);
   const [stAppear, setStAppear] = React.useState(false);
+  const [calAppear, setCalAppear] = React.useState(false);
+
   
 
 
@@ -34,19 +37,29 @@ function Header()
     setStAppear(false);
     setClAppear(true);
     setTlAppear(false);
+    setCalAppear(false);
     setAnchorEl(null);
     
   };
   const OpenTrainingList = () => {
     setClAppear(false);
+    setCalAppear(false);
     setStAppear(false);
     setTlAppear(true);
     setAnchorEl(null);
   };
   const OpenGraph = () => {
     setClAppear(false);
+    setCalAppear(false);
     setTlAppear(false);
     setStAppear(true);
+    setAnchorEl(null);
+  }
+  const OpenCalendar = () => {
+    setClAppear(false);
+    setTlAppear(false);
+    setStAppear(false);
+    setCalAppear(true);
     setAnchorEl(null);
   }
   
@@ -91,6 +104,7 @@ function Header()
                     <MenuItem onClick={OpenCustomerList}>Customer List</MenuItem>
                     <MenuItem onClick={OpenTrainingList}>Trainings</MenuItem>
                     <MenuItem onClick={OpenGraph}>Graphic</MenuItem>
+                    <MenuItem onClick={OpenCalendar}>Calendar</MenuItem>
                     
                 </Menu>
                 </div>
@@ -101,6 +115,7 @@ function Header()
         {clAppear && <CustomerList/>}
         {tlAppear && <TrainingsList/>}
         {stAppear && <StatisticsView/>}
+        {calAppear && <MyCalendar/>}
         
      </div>
   );
