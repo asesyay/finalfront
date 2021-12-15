@@ -1,9 +1,12 @@
 import React, { useEffect, useState} from 'react';
-import { Box } from '@mui/material';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Label } from 'recharts';
 import _ from 'lodash';
 
-export default function StatisticsView () {
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Label } from 'recharts';
+
+import { Box } from '@mui/material';
+
+
+function Graphics () {
 
   const [finalData, setFinalData] = useState([]);
 
@@ -44,3 +47,5 @@ export default function StatisticsView () {
     </Box>
   )
 }
+
+export default Graphics;

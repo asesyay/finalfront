@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import CustomerList from './CustomerList';
 import TrainingsList from './TrainingsList';
-import StatisticsView from './StatisticsView';
+import Graphics from './Graphics';
 import MyCalendar from './Calendar'
 
 function Header() 
@@ -114,7 +114,7 @@ function Header()
         </Box>
         {clAppear && <CustomerList/>}
         {tlAppear && <TrainingsList/>}
-        {stAppear && <StatisticsView/>}
+        {stAppear && <Graphics/>}
         {calAppear && <MyCalendar/>}
         
      </div>
