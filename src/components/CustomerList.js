@@ -119,11 +119,7 @@ function CustomerList()
     const onExportClick=()=>{
         gridApi.exportDataAsCsv()
     }
-    const TwoButtonOnTopStyle = {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    }
+    
 
     return(
         <div>

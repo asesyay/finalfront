@@ -10,7 +10,7 @@ import dayjs from 'dayjs'
 
 function AddTraining(props) {
     const [training, setTraining] = React.useState([{
-        date: new Date,     
+        date: new Date(),     
         duration: "",  
         activity: "",
         customer: ""

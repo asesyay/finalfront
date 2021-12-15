@@ -14,7 +14,7 @@ function TrainingsList()
         useEffect(() => {
         fetchTrainings()
     }, []);
-    const[trUrl, setTrUrl] = useState('https://customerrest.herokuapp.com/api/trainings')
+    const[trUrl] = useState('https://customerrest.herokuapp.com/api/trainings')
     const[open, setOpen]= useState(false);
     const[msg, setMsg] = useState('');
     const [gridApi, setGridApi]=useState('');

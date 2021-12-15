@@ -10,11 +10,7 @@ function Graphics () {
 
   const [finalData, setFinalData] = useState([]);
 
-   const fetchData = () => {
-    fetch('https://customerrest.herokuapp.com/gettrainings')
-    .then(response => response.json())
-    .then(data => setTrainings(data))
-  }
+   
 
   const setTrainings = (data) => {
     const mappedData = data.map((item) =>  {
@@ -27,7 +23,13 @@ function Graphics () {
     setFinalData(summedData)
   }
 
-  useEffect(() => fetchData(), []);
+  useEffect(() => {const fetchData = () => {
+    fetch('https://customerrest.herokuapp.com/gettrainings')
+    .then(response => response.json())
+    .then(data => setTrainings(data))
+  };
+  fetchData();
+ }, []);
 
  
 
