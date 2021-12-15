@@ -34,14 +34,14 @@ function Graphics () {
  
 
   return (
-    <Box style={{height: '75vh', width: '90vw', flex:1, marginLeft: 'auto', marginRight: 'auto'}}>
+    <Box style={{width: '90vw', flex:1, marginLeft: 'auto', marginRight: 'auto'}}>
       <ResponsiveContainer width="100%" height="100%">
           <BarChart width={1000} height={1000} data={finalData} margin={{ top: 40, right: 5, left: 40, bottom: 5 }}>
-            <XAxis dataKey="activity" >
+            <XAxis dataKey="activity" dy={10}>
               <Label fontSize={20} fontFamily="Calibri" position="bottom" angle={0} value="Activities"/>
             </XAxis>
             <YAxis type="number">
-              <Label fontSize={20} fontFamily="Calibri" position="left" angle={270} value="Duration Sum"/>
+              <Label fontSize={20} fontFamily="Calibri" position="left" angle={270} value="Duration Sum (in minutes)"/>
             </YAxis>            
             <Bar dataKey="duration" fill="#40d9f7" />
         </BarChart>
