@@ -17,7 +17,7 @@ function CustomerList()
     }, [])
     const[open, setOpen]= useState(false);
     const[msg, setMsg] = useState('');
-    let gridApi;
+    const [gridApi, setGridApi]=useState('');
 
     const handleClose = () => {
         setOpen(false);
@@ -113,7 +113,7 @@ function CustomerList()
     ]
     
     const onGridReady=(params)=>{
-        gridApi=params.api;
+        setGridApi(params.api);
         console.log(gridApi)
     }
     const onExportClick=()=>{

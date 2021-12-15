@@ -10,12 +10,14 @@ import Menu from '@mui/material/Menu';
 import CustomerList from './CustomerList';
 import TrainingsList from './TrainingsList';
 
+
 function Header() 
 {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [clAppear, setClAppear] = React.useState(true);
   const [tlAppear, setTlAppear] = React.useState(false);
+  
 
 
   
@@ -28,15 +30,23 @@ function Header()
     setAnchorEl(null);
   };
   const OpenCustomerList = () => {
+    
     setClAppear(true);
     setTlAppear(false);
     setAnchorEl(null);
   };
   const OpenTrainingList = () => {
     setClAppear(false);
+    
     setTlAppear(true);
     setAnchorEl(null);
   };
+  const OpenGraph = () => {
+    setClAppear(false);
+    setTlAppear(false);
+    
+    setAnchorEl(null);
+  }
   
 
   return (
@@ -78,7 +88,7 @@ function Header()
                 >
                     <MenuItem onClick={OpenCustomerList}>Customer List</MenuItem>
                     <MenuItem onClick={OpenTrainingList}>Trainings</MenuItem>
-                    <MenuItem onClick={handleClose}>Export Data</MenuItem>
+                    
                 </Menu>
                 </div>
             
@@ -87,6 +97,7 @@ function Header()
         </Box>
         {clAppear && <CustomerList/>}
         {tlAppear && <TrainingsList/>}
+        
      </div>
   );
 }
